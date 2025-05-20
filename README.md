@@ -8,12 +8,13 @@
 
 > This code is based on [VeRL]((https://github.com/volcengine/verl)) framework 
 
-### Key Insights ✨  
+## Key Insights ✨  
 - **🧠 Adaptive Reasoning Control** – Dynamically adjusts reasoning depth based on question complexity for optimal efficiency.  
 - **⚖️ Dual Reward Optimization** – Balances answer quality and brevity through comparative evaluation.  
 - **📊 Versatile Task Support** – Handles both verifiable (fact-based) and fuzzy (open-ended) reasoning tasks.  
 - **🔍 Scaling Laws Revealed** – Larger models achieve better results with *shorter* reasoning chains (*"Less is more"* for biger models).  
 
+## Verify Task
 
 ![示例图片](img/aime.png)
 
@@ -31,6 +32,8 @@
 | **Average** | 4,137 | 2,879 🔻30.4 | 49.4 | 49.8🟢 |
 
 
+## Fuzzy Task
+![示例图片](img/alpacafarm.png)
 
 ## Quick Start
 ### Installation
