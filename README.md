@@ -3,10 +3,9 @@
 
 
 [![ArXiv](https://img.shields.io/badge/ArXiv-twyn-yellow?logo=arxiv)](https://arxiv.org/abs/2504.03234)
-[![Dataset](https://img.shields.io/badge/huggingface-Dataset-green.svg)](https://huggingface.co/datasets/linke666/twyn/tree/main)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-> This code is based on [VeRL]((https://github.com/volcengine/verl)) framework 
+> This code is based on [VeRL](https://github.com/volcengine/verl) framework 
 
 ## Key Insights ✨  
 - **🧠 Adaptive Reasoning Control** – Dynamically adjusts reasoning depth based on question complexity for optimal efficiency.  
@@ -44,11 +43,20 @@ pip install -e .
 
 ### Datasets
 
-
-Our raw [Training data](https://huggingface.co/datasets/linke666/twyn/tree/main) is from [DeepScaleR](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)
+Our raw Training data is from [DeepScaleR](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)
 and [DAPO](https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k).
 
-[Validation](https://huggingface.co/datasets/linke666/twyn/tree/main): [AIME 2024](https://github.com/lefttt/TWYN/data/evals/0409_aime.parquet),[AMC](https://github.com/lefttt/TWYN/data/evals/0409_amc.parquet),[MATH 500](https://github.com/lefttt/TWYN/data/evals/0409_math.parquet),[Minerva](https://github.com/lefttt/TWYN/data/evals/0409_minerva.parquet),[Olympiad Bench](https://github.com/lefttt/TWYN/data/evals/0409_olympiad_bench.parquet).
+Validation Data: AIME 2024,AMC 2023,MATH 500,Minerva Math,Olympiad Bench.
+
+*Data Template*
+All data was parsed using the following template: `{question} Let's think step by step,write the thought in <think> and </think>,then output the final answer within \\boxed{}.`
+
+*Data Sample*
+
+```python
+[{"content": "In triangle $ABC$, $\\sin \\angle A = \\frac{4}{5}$ and $\\angle A < 90^\\circ$. Let $D$ be a point outside triangle $ABC$ such that $\\angle BAD = \\angle DAC$ and $\\angle BDC = 90^\\circ$. Suppose that $AD = 1$ and that $\\frac{BD}{CD} = \\frac{3}{2}$. If $AB + AC$ can be expressed in the form $\\frac{a\\sqrt{b}}{c}$ where $a, b, c$ are pairwise relatively prime integers, find $a + b + c$. Let's think step by step,write the thought in <think> and </think>,then output the final answer within \\boxed{}.",
+"role": "user"}]
+```
 
 
 ### Training Scripts
