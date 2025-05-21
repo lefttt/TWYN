@@ -72,14 +72,19 @@ bash scripts/alpaca/twyn_7b_train_alpaca_grpo_gpu32.sh
 ## Citation
 If you use this work in your research, please cite:
 ```bibtex
-
+@article{yang2025think,
+  title={Think When You Need: Self-Adaptive Chain-of-Thought Learning},
+  author={Yang, Junjie and Lin, Ke and Yu, Xing},
+  journal={arXiv preprint arXiv:2504.03234},
+  year={2025}
+}
 ```
 
 ## License
-This project incorporates code from:
-- [VERL] (licensed under Apache-2.0)
-- [DAPO] (licensed under Apache-2.0)
-- [DeepScaleR](licensed under MIT)
+This project incorporates code and data from:
+- *VERL* licensed under [Apache-2.0]
+- *DAPO* licensed under [Apache-2.0]
+- *DeepScaleR* licensed under [MIT]
 
 The combined work is licensed under [Apache-2.0].
 
