@@ -46,9 +46,10 @@ pip install -e .
 Our raw Training data is from [DeepScaleR-Preview-Dataset](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)
 and [DAPO-Math-17k](https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k).
 
-Validation Data: AIME 2024,AMC 2023,MATH 500,Minerva Math,Olympiad Bench.
+Validation Datas: [AIME 2024](https://huggingface.co/datasets/linke666/twyn/tree/main/evals),[AMC 2023](https://huggingface.co/datasets/linke666/twyn/tree/main/evals),[MATH 500](https://huggingface.co/datasets/linke666/twyn/tree/main/evals),[Minerva Math](https://huggingface.co/datasets/linke666/twyn/tree/main/evals),[Olympiad Bench](https://huggingface.co/datasets/linke666/twyn/tree/main/evals).
 
 *Data Template*
+
 All data was parsed using the following template: `{question} Let's think step by step,write the thought in <think> and </think>,then output the final answer within \\boxed{}.`
 
 *Data Sample*
