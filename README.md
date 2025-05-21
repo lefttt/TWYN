@@ -83,7 +83,7 @@ If you use this work in your research, please cite:
 
 ## License
 This project incorporates code and data from:
-- *[VERL]((https://github.com/volcengine/verl) )* licensed under [Apache-2.0]
+- *[VERL](https://github.com/volcengine/verl)* licensed under [Apache-2.0]
 - *[DAPO-Math-17k](https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k)* licensed under [Apache-2.0]
 - *[DeepScaleR-Preview-Dataset](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)* licensed under [MIT]
 
