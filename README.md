@@ -43,8 +43,8 @@ pip install -e .
 
 ### Datasets
 
-Our raw Training data is from [DeepScaleR](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)
-and [DAPO](https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k).
+Our raw Training data is from [DeepScaleR-Preview-Dataset](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)
+and [DAPO-Math-17k](https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k).
 
 Validation Data: AIME 2024,AMC 2023,MATH 500,Minerva Math,Olympiad Bench.
 
@@ -82,9 +82,9 @@ If you use this work in your research, please cite:
 
 ## License
 This project incorporates code and data from:
-- *VERL* licensed under [Apache-2.0]
-- *DAPO* licensed under [Apache-2.0]
-- *DeepScaleR* licensed under [MIT]
+- *[VERL]((https://github.com/volcengine/verl) )* licensed under [Apache-2.0]
+- *[DAPO-Math-17k](https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k)* licensed under [Apache-2.0]
+- *[DeepScaleR-Preview-Dataset](https://huggingface.co/datasets/agentica-org/DeepScaleR-Preview-Dataset)* licensed under [MIT]
 
-The combined work is licensed under [Apache-2.0].
+The combined work is licensed under [Apache-2.0]
 
