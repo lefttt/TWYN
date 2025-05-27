@@ -6,6 +6,7 @@ from itertools import combinations
 import concurrent.futures
 from tqdm import tqdm
 import re  # Add import for regular expressions
+import random
 
 
 def split_solution_to_sp_user_prompt(solution_str):
@@ -41,8 +42,7 @@ def split_cot_response(response):
     return cot, answer
 
 def compute_pair_score(response_pair, rm_version, tokenizer):
-    # try:
-    annotator = PairwiseAutoAnnotator(annotators_config="alpaca_eval_gpt4")
+    annotator = PairwiseAutoAnnotator()
     
     index_1, index_2 = response_pair['index_1'], response_pair['index_2']
     sp_user_prompt = response_pair['sp_user_prompt']
@@ -75,9 +75,6 @@ def compute_pair_score(response_pair, rm_version, tokenizer):
             }
 
     annotated = annotator.annotate_pairs(to_annotate=[pair_data])
-    
-    # print(f"annotated !!!!!!!!!!!!: {annotated}")
-
     preference = annotated[0]['preference']
     if preference == 1.0:
         alpha = 5
@@ -204,7 +201,8 @@ def compute_score_alpaca(
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(2, len(response_pairs))) as executor:
         future_to_pair = {executor.submit(compute_pair_score, pair, rm_version, tokenizer): pair for pair in response_pairs}
         
-        for future in tqdm(concurrent.futures.as_completed(future_to_pair), total=len(response_pairs), desc="Computing pairwise scores"):
+        # for future in tqdm(concurrent.futures.as_completed(future_to_pair), total=len(response_pairs), desc="Computing pairwise scores"):
+        for future in concurrent.futures.as_completed(future_to_pair):
             pair = future_to_pair[future]
             # try:
             index_1, index_2, score_1, score_2 = future.result()

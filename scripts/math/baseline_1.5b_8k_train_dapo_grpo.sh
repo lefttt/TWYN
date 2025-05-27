@@ -1,14 +1,15 @@
 #!/bin/bash
 export VLLM_ATTENTION_BACKEND=XFORMERS
-FILENAME=$(basename "$0" .sh)
-BASE_DIR="./"
+EXPNAME=math_baseline_8k
+BASE_DIR="your_base_dir"
 PYTHONUNBUFFERED=1 HYDRA_FULL_ERROR=1 CUDA_LAUNCH_BLOCKING=1 python -m verl.trainer.main_ppo \
- data.train_files=$BASE_DIR/data/dapo_math/train_0325_dapo_math.parquet \
- data.val_files=[$BASE_DIR/data/evals/0409_math.parquet,$BASE_DIR/data/evals/0409_amc.parquet,$BASE_DIR/data/evals/0409_aime.parquet,$BASE_DIR/data/evals/0409_minerva.parquet,$BASE_DIR/data/evals/0409_olympiad_bench.parquet] \
+ data.train_files=$BASE_DIR/twyn_data/dapo_math/train_0325_dapo_math.parquet \
+ data.val_files=[$BASE_DIR/twyn_data/evals/0409_math.parquet,$BASE_DIR/twyn_data/evals/0409_amc.parquet,$BASE_DIR/twyn_data/evals/0409_aime.parquet,$BASE_DIR/twyn_data/evals/0409_minerva.parquet,$BASE_DIR/twyn_data/evals/0409_olympiad_bench.parquet] \
+ data.filter_overlong_prompts=True\
  data.train_batch_size=128 \
  data.val_batch_size=64 \
  data.max_prompt_length=2048 \
- data.max_response_length=16384 \
+ data.max_response_length=8192 \
  actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B \
  actor_rollout_ref.actor.optim.lr=1e-6 \
  actor_rollout_ref.actor.ppo_mini_batch_size=64 \
@@ -23,8 +24,7 @@ PYTHONUNBUFFERED=1 HYDRA_FULL_ERROR=1 CUDA_LAUNCH_BLOCKING=1 python -m verl.trai
  actor_rollout_ref.rollout.disable_log_stats=False \
  actor_rollout_ref.rollout.temperature=0.6 \
  actor_rollout_ref.rollout.val_temperature=0.6 \
- actor_rollout_ref.actor.ppo_max_token_len_per_gpu=18432 \
- actor_rollout_ref.rollout.max_num_batched_tokens=18432 \
+ actor_rollout_ref.actor.ppo_max_token_len_per_gpu=16384 \
  actor_rollout_ref.rollout.n=8 \
  actor_rollout_ref.rollout.n_val=32 \
  actor_rollout_ref.actor.use_kl_loss=True \
@@ -34,16 +34,16 @@ PYTHONUNBUFFERED=1 HYDRA_FULL_ERROR=1 CUDA_LAUNCH_BLOCKING=1 python -m verl.trai
  critic.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B \
  critic.ppo_micro_batch_size_per_gpu=2 \
  algorithm.kl_ctrl.kl_coef=0.001 \
- +trainer.val_before_train=True \
+ +trainer.val_before_train=False \
  trainer.default_hdfs_dir=null \
  trainer.n_gpus_per_node=8 \
- trainer.nnodes=8 \
+ trainer.nnodes=4 \
  trainer.save_freq=20 \
  trainer.test_freq=100 \
  trainer.total_epochs=15 \
  trainer.project_name=math \
- trainer.experiment_name=$FILENAME \
+ trainer.experiment_name=$EXPNAME \
  trainer.tensorboard_dir=$BASE_DIR/tensorboard \
- trainer.default_local_dir=$BASE_DIR/checkpoints/math/$FILENAME \
+ trainer.default_local_dir=$BASE_DIR/checkpoints/math/$EXPNAME \
  reward_model.gen_rm=False \
- algorithm.adv_estimator=grpo_twyn 2>&1 | tee $BASE_DIR/log/$FILENAME.log
+ algorithm.adv_estimator=grpo 2>&1 | tee $BASE_DIR/log/$EXPNAME.log

@@ -1,16 +1,15 @@
 #!/bin/bash
 export VLLM_ATTENTION_BACKEND=XFORMERS
 # deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
-FILENAME=$(basename "$0" .sh)
-FILENAME='twyn_7b_train_alpaca_grpo_gpu32'
+EXPNAME='baseline_7b_train_alpaca_grpo_gpu32'
+BASE_DIR="your_base_dir"
 PYTHONUNBUFFERED=1 HYDRA_FULL_ERROR=1 CUDA_LAUNCH_BLOCKING=1 python -m verl.trainer.main_ppo \
- data.train_files=./projects/verl/.cache/tatsu-lab___alpaca_farm/train_alpaca_combined.parquet \
- data.val_files=./projects/verl/.cache/tatsu-lab___alpaca_farm/train_alpaca_combined.parquet \
+ data.train_files=$BASE_DIR/twyn_data/alpaca_farm/train_alpaca_combined.parquet \
  data.train_batch_size=32 \
  data.val_batch_size=32 \
  data.max_prompt_length=1024 \
  data.max_response_length=1024 \
- actor_rollout_ref.model.path=./DeepSeek-R1-Distill-Qwen-7B \
+ actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-7B \
  actor_rollout_ref.actor.optim.lr=1e-6 \
  actor_rollout_ref.actor.ppo_mini_batch_size=32 \
  actor_rollout_ref.model.use_remove_padding=True \
@@ -31,7 +30,7 @@ PYTHONUNBUFFERED=1 HYDRA_FULL_ERROR=1 CUDA_LAUNCH_BLOCKING=1 python -m verl.trai
  actor_rollout_ref.actor.kl_loss_coef=0.0 \
  actor_rollout_ref.actor.kl_loss_type=low_var_kl \
  critic.optim.lr=5e-6 \
- critic.model.path=./DeepSeek-R1-Distill-Qwen-7B \
+ critic.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-7B \
  critic.ppo_micro_batch_size_per_gpu=2 \
  algorithm.kl_ctrl.kl_coef=0.0 \
  algorithm.adv_estimator=grpo \
@@ -40,11 +39,10 @@ PYTHONUNBUFFERED=1 HYDRA_FULL_ERROR=1 CUDA_LAUNCH_BLOCKING=1 python -m verl.trai
  trainer.n_gpus_per_node=8 \
  trainer.nnodes=4 \
  trainer.save_freq=50 \
- trainer.test_freq=100000 \
  trainer.total_epochs=15 \
  trainer.project_name=alpaca \
- trainer.experiment_name=$FILENAME \
- trainer.tensorboard_dir=./alpaca/tensorboard \
- trainer.rl_logging_board_dir=./alpaca/rl_logging_board\
+ trainer.experiment_name=$EXPNAME \
+ trainer.tensorboard_dir=$BASE_DIR/tensorboard \
+ trainer.default_local_dir=$BASE_DIR/checkpoints/alpaca/$EXPNAME \
  reward_model.gen_rm=alpaca\
- reward_model.version=v1 2>&1 | tee ./projects/verl/scripts/alpaca/$FILENAME.log
+ reward_model.version=v1 2>&1 | tee $BASE_DIR/log/$EXPNAME.log

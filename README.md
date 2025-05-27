@@ -3,6 +3,7 @@
 
 
 [![ArXiv](https://img.shields.io/badge/ArXiv-twyn-yellow?logo=arxiv)](https://arxiv.org/abs/2504.03234)
+[![Dataset](https://img.shields.io/badge/huggingface-Dataset-green.svg)](https://huggingface.co/datasets/linke666/twyn/tree/main)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 > This code is based on [VeRL](https://github.com/volcengine/verl) framework 
@@ -61,14 +62,31 @@ All data was parsed using the following template: `{question} Let's think step b
 
 
 ### Training Scripts
+
+#### download dataset
+
+Processed training & eval dataset can be downloaded from [huggingface](https://huggingface.co/datasets/linke666/twyn/tree/main).
+
+
 #### verifiable task
+we fully open-source the recipe of our RL training , Change `BASE_DIR`and run the script below.
 ```bash
-bash scripts/math/twyn_1.5b_16k_train_dapo_grpo.sh
+bash scripts/math/twyn_1.5b_8k_train_dapo_grpo.sh
 ```
+
 #### fuzzy task
+
+1. To get started with [Alpaca_farm](https://github.com/tatsu-lab/alpaca_farm/blob/main/README.md), set the environment variable OPENAI_API_KEY to your OpenAI API key, and (optionally) OPENAI_ORG to the organization ID. You can do this by running
+```bash
+export OPENAI_API_KEY="sk..."
+```
+
+2. Change `BASE_DIR` and run script:
 ```bash
 bash scripts/alpaca/twyn_7b_train_alpaca_grpo_gpu32.sh
 ```
+
+3. Automatic evaluation is implemented in reference to [Alpaca_farm](https://github.com/tatsu-lab/alpaca_farm/blob/main/README.md).
 
 ## Citation
 If you use this work in your research, please cite:

@@ -22,7 +22,7 @@ from tqdm import tqdm
 
 from verl import DataProto
 import torch
-from verl.utils.reward_score import custom_math, gsm8k, human_model, diving, math_sympy, alpaca
+from verl.utils.reward_score import custom_math, gsm8k, math_sympy, alpaca
 from verl.trainer.ppo.ray_trainer import RayPPOTrainer
 
 
